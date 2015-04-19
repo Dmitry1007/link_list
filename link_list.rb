@@ -1,44 +1,57 @@
 class Ill
-#   Iterative solutions use looping structures 
-#   (`while`, `for`) to walk through the nodes in the list. 
-end
-
-class Rll
-  attr_reader :head, :count
+  attr_accessor :head
   def initialize
     @head  = nil
-    @count = 0
   end
 
   def add_node(data)
-    @count   += 1
     if @head == nil
       @head  = Node.new(data)
-    else
-      @head  = @head.next_node
+    else  
+      current_node = @head
+      until current_node.next_node == nil
+        current_node = current_node.next_node
+      end
+      current_node.next_node = Node.new(data)
     end
   end
+
+  def count
+    if @head.nil?
+      0
+    else
+      count = 1
+      current_node = @head
+      while current_node.next_node != nil
+        count += 1
+        current_node = current_node.next_node
+      end
+      count
+    end
+  end
+
 end
 
 class Node
-  attr_reader :data, :next_node
+  attr_accessor :data, :next_node
   def initialize(data)
     @data      = data
-    @next_node = "last"
+    @next_node = nil
   end
 end
 
-linky = Rll.new
-linky.add_node("a")
-linky
-linky.add_node("b")
-linky.count
+# linky = Ill.new
+
+# linky.add_node("a")
+# linky.head
+
+# linky.add_node("b")
+# linky.head
+
+# linky.add_node("c")
+# linky.head
 
 
-# The __list__ itself can hold a reference to one thing -- the head node.
-# Each node can hold a single element of data and a link to the next node in the list.
-# The last node of the list is often called its __tail__.
-# Using sweet ASCII art, it might look like this:
 
 # ```
 # List -- (head) --> ["hello" | -]-- (link) --> ["world" | -]-- (link) --> ["!" | ]
