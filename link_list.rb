@@ -1,8 +1,8 @@
 class Node
-  attr_accessor :data, :next_node
+  attr_accessor :data, :link
   def initialize(data)
     @data      = data
-    @next_node = nil
+    @link = nil
   end
 end
 
@@ -17,10 +17,10 @@ class Ill
       @head  = Node.new(data)
     else  
       current_node = @head
-      until current_node.next_node == nil
-        current_node = current_node.next_node
+      until current_node.link == nil
+        current_node = current_node.link
       end
-      current_node.next_node = Node.new(data)
+      current_node.link = Node.new(data)
     end
   end
 
@@ -30,9 +30,9 @@ class Ill
     else
       count = 1
       current_node = @head
-      while current_node.next_node != nil
+      until current_node.link == nil
         count += 1
-        current_node = current_node.next_node
+        current_node = current_node.link
       end
       count
     end
@@ -40,15 +40,28 @@ class Ill
 
   def last_node
     current_node = @head
-      if current_node.next_node == nil
-        last_node = current_node
-      else
-        until current_node.next_node == nil
-          current_node = current_node.next_node
-          last_node = current_node
-        end
+    if current_node.link == nil
+      last_node = current_node
+    else
+      until current_node.link == nil
+        current_node = current_node.link
+        last_node    = current_node
       end
+    end
     last_node.data
+  end
+
+  def pop
+    # require 'pry'; binding.pry
+    if @head.link == nil
+      @head = nil
+    else
+      until @head.link == nil
+        @head = @head.link
+        last_node = @head
+      end
+    end
+    last_node = nil
   end
 end
 
@@ -57,6 +70,5 @@ linky = Ill.new
 linky.add_node("a")
 linky.add_node("b")
 linky
-# linky.add_node("c")
-linky.last_node
-
+linky.pop
+linky

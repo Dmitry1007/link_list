@@ -24,10 +24,20 @@ class ListTest < Minitest::Test
     list.add_node("A")
     list.add_node("B")
     list.add_node("C")
-    assert_equal "C", list.last_node
+    list.add_node("D")
+    assert_equal "D", list.last_node
   end
 
-  def test_it_pops_the_last_element_from_the_list
+  def test_it_pops_the_last_node_from_the_list
+    list.add_node("A")
+    list.pop 
+    assert_equal nil, list.head
+
+    list.add_node("A")
+    # list.add_node("B")
+    # list.add_node("C")
+    list.pop 
+    assert_equal nil, list.last_node
   end
 
   def test_a_popped_element_is_removed
