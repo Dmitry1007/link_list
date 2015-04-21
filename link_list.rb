@@ -1,3 +1,11 @@
+class Node
+  attr_accessor :data, :next_node
+  def initialize(data)
+    @data      = data
+    @next_node = nil
+  end
+end
+
 class Ill
   attr_accessor :head
   def initialize
@@ -29,23 +37,26 @@ class Ill
       count
     end
   end
-end
 
-class Node
-  attr_accessor :data, :next_node
-  def initialize(data)
-    @data      = data
-    @next_node = nil
+  def last_node
+    current_node = @head
+      if current_node.next_node == nil
+        last_node = current_node
+      else
+        until current_node.next_node == nil
+          current_node = current_node.next_node
+          last_node = current_node
+        end
+      end
+    last_node.data
   end
 end
 
-# linky = Ill.new
 
-# linky.add_node("a")
-# linky.head
-
-# linky.add_node("b")
-# linky.head
-
+linky = Ill.new
+linky.add_node("a")
+linky.add_node("b")
+linky
 # linky.add_node("c")
-# linky.head
+linky.last_node
+

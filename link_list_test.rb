@@ -20,11 +20,11 @@ class ListTest < Minitest::Test
     assert_equal 3, list.count
   end
 
-  def test_it_finds_the_last_node
+  def test_it_finds_the_last_node 
     list.add_node("A")
     list.add_node("B")
     list.add_node("C")
-    assert_equal "C", list.last_node.data
+    assert_equal "C", list.last_node
   end
 
   def test_it_pops_the_last_element_from_the_list
